@@ -25,29 +25,31 @@ To create a fully automated, reliable, and smart attendance system that supports
 
 ## Repository Structure
 
+```md
 smart-attendance/
 │
 ├── ai-backend/ # Backend for AI modules and face recognition
 │ ├── app/
-│ │ ├── face_recognition/ # Handles facial detection & verification using OpenCV + DeepFace
-│ │ ├── ai_automation/ # Smart semester planner and AI-based automation logic (PyTorch)
-│ ├── models/ # Database models for attendance & recognition data
-│ ├── routes/ # API routes exposed via FastAPI (face scan, planner API)
-│ └── main.py # Entry point of the FastAPI backend
+│ │ ├── face_recognition/ 
+│ │ ├── ai_automation/    #(PyTorch)
+│ ├── models/  
+│ ├── routes/ 
+│ └── main.py 
 │
 ├── tanstack/ # Full-stack web platform (TanStack + React + Prisma)
 │ ├── src/
-│ │ ├── components/ # Reusable UI components (buttons, inputs, cards, modals)
+│ │ ├── components/ # Reusable UI components 
 │ │ ├── routes/ # Application routes (dashboard, attendance, planner, admin)
 │ │ ├── api/ # API handlers connecting frontend ↔ backend
-│ │ ├── pages/ # Static or dynamic pages (Home, Login, Register)
-│ │ ├── utils/ # Helper functions and hooks (auth, data fetching)
+│ │ ├── pages/ 
+│ │ ├── utils/ 
 │ ├── prisma/ # Database schema and migrations (PostgreSQL + Prisma ORM)
-│ ├── styles/ # Global and modular styles (CSS/Tailwind)
-│ └── package.json # Project dependencies and scripts
+│ ├── styles/ 
+│ └── package.json 
 │
 ├── design/ # Figma design files, UI/UX mockups, and wireframes
 │
 ├── docs/ # Project documentation (proposal, flowcharts, SDLC, diagrams)
 │
 └── README.md # Main project overview, setup guide, and contribution details
+```
