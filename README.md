@@ -11,9 +11,14 @@ To create a fully automated, reliable, and smart attendance system that supports
 ## Technologies
 
 1. **FastAPI Backend (AI & Logic Layer):** Handles **face recognition**, **AI model training**, and **attendance verification**. This backend focuses on image processing, feature extraction, and student face matching.
+
 2. **TanStack Start (Web Logic Layer):** Built with **Ract (App Router)**, **RPC**, **Prisma**, and **PostgreSQL**, hosted on **Vercel**. This handles user management, dashboards, data visualization, and API communication with the FastAPI module.
+
 3. **Frontend:** Uses **TanStack Start (React framework)** with **shadcn/ui**, **TailwindCSS**, and **NextAuth** for secure login and role management.
+
 4. **Database:** PostgreSQL, managed via Prisma ORM, shared between web and AI systems for synchronized data.
+
+
 
 ## Team
 
