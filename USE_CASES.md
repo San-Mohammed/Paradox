@@ -2,7 +2,7 @@
 
 To identify the main actors and develop formal use cases that describe how users and external systems interact with the **Smart University Ecosystem** — an integrated LMS platform with AI-based face recognition attendance and AI quiz generation.
 
-![use case](/Paradox/assets//usecase.jpg)
+![use case](/assets//usecase.jpg)
 
 ---
 
