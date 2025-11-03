@@ -311,14 +311,6 @@ Below are detailed sub-diagrams focusing on each actor’s related use cases.
 
 ---
 
-## 4. Relationships and Interactions
-
-| **Relationship Type**     | **Description**                                                        |
-| ------------------------- | ---------------------------------------------------------------------- |
-| **<<extend>>**            | “Record Attendance with Face Recognition” extends “Manual Attendance.” |
-| **<<include>>**           | “Generate Quiz” includes “Send Request to OpenAI API.”                 |
-| **External System Links** | Face Recognition Device provides input; OpenAI API returns quiz data.  |
-
 ---
 
 **End of Document**
