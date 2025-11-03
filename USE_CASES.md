@@ -169,104 +169,145 @@ Below are detailed sub-diagrams focusing on each actor’s related use cases.
 
 ### UC-06 – View Attendance Dashboard
 
-| **Primary Actor** | Student |
-| **Goal** | View attendance rates and history. |
-| **Pre-Conditions** | Student enrolled in courses. |
-| **Post-Conditions** | Dashboard displays accurate attendance %. |
-| **Main Flow** | 1. Student logs in.<br>2. Opens dashboard.<br>3. Data displayed per course. |
-| **Exceptions** | Missing data or backend error. |
+| **Item**            | **Details**                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Primary Actor**   | Student                                                                                                                  |
+| **Goal**            | View personal attendance records and percentages per course.                                                             |
+| **Pre-Conditions**  | Student is logged in and enrolled in at least one course.                                                                |
+| **Post-Conditions** | Attendance data displayed correctly on the dashboard.                                                                    |
+| **Main Flow**       | 1. Student logs in.<br>2. Opens dashboard.<br>3. System fetches attendance data.<br>4. Displays records and percentages. |
+| **Alternate Flow**  | If connection fails, cached data is shown.                                                                               |
+| **Exceptions**      | Missing or corrupted data from backend.                                                                                  |
 
 ---
 
-### UC-07 – Submit Assignment/Quiz
+### UC-07 – Submit Assignment / Quiz
 
-| **Primary Actor** | Student |
-| **Goal** | Submit answers to assignments or quizzes. |
-| **Pre-Conditions** | Quiz published and open. |
-| **Post-Conditions** | Submission saved with timestamp. |
-| **Main Flow** | 1. Student opens quiz.<br>2. Answers and submits.<br>3. Confirmation shown. |
-| **Exceptions** | Late or incomplete submission. |
+| **Item**            | **Details**                                                                                                                                   |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Student                                                                                                                                       |
+| **Goal**            | Submit assignments or quizzes online.                                                                                                         |
+| **Pre-Conditions**  | The quiz or assignment is published and open for submission.                                                                                  |
+| **Post-Conditions** | Submission stored with timestamp and confirmation message.                                                                                    |
+| **Main Flow**       | 1. Student opens assigned quiz.<br>2. Completes answers or uploads file.<br>3. Submits response.<br>4. System stores and confirms submission. |
+| **Exceptions**      | Late or incomplete submission.                                                                                                                |
 
 ---
 
 ### UC-08 – View Grades and Progress
 
-| **Primary Actor** | Student |
-| **Goal** | View scores, grades, and gamified progress. |
-| **Pre-Conditions** | Graded data exists. |
-| **Post-Conditions** | Dashboard updated with results. |
-| **Main Flow** | 1. Student opens progress tab.<br>2. System fetches data.<br>3. Displays grades and trophies. |
-| **Exceptions** | No graded items available. |
+| **Item**            | **Details**                                                                                                                            |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Student                                                                                                                                |
+| **Goal**            | View overall course grades, leaderboard, and gamified progress.                                                                        |
+| **Pre-Conditions**  | Teacher has graded submissions.                                                                                                        |
+| **Post-Conditions** | Dashboard updated with grades and progress indicators.                                                                                 |
+| **Main Flow**       | 1. Student logs in.<br>2. Opens progress dashboard.<br>3. System fetches grades and badges.<br>4. Displays results and level progress. |
+| **Exceptions**      | No grades available or server fetch error.                                                                                             |
 
 ---
 
 ### UC-09 – Receive Notifications
 
-| **Primary Actor** | Student |
-| **Goal** | Receive alerts (grades, new materials, quizzes). |
-| **Pre-Conditions** | Student enrolled in courses. |
-| **Post-Conditions** | Notifications delivered and stored. |
-| **Main Flow** | 1. Event triggered (e.g., new quiz).<br>2. System sends alert.<br>3. Student reads notification. |
+| **Item**            | **Details**                                                                                                                                     |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Student                                                                                                                                         |
+| **Goal**            | Receive system notifications about grades, new lectures, or upcoming quizzes.                                                                   |
+| **Pre-Conditions**  | Student enrolled in courses and notifications enabled.                                                                                          |
+| **Post-Conditions** | Notifications displayed in system UI and stored in database.                                                                                    |
+| **Main Flow**       | 1. Teacher or system triggers notification.<br>2. System sends message to student dashboard.<br>3. Student views and acknowledges notification. |
+| **Exceptions**      | Notification delivery delay or network issue.                                                                                                   |
 
 ---
 
 ### UC-10 – Access Uploaded Lectures
 
-| **Primary Actor** | Student |
-| **Goal** | Access stored lecture materials. |
-| **Main Flow** | 1. Opens course.<br>2. Views available files.<br>3. Downloads material. |
-| **Exceptions** | File missing or permission denied. |
+| **Item**            | **Details**                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Student                                                                                           |
+| **Goal**            | Access and download uploaded lecture materials.                                                   |
+| **Pre-Conditions**  | Teacher has uploaded materials to the system.                                                     |
+| **Post-Conditions** | Lecture successfully accessed or downloaded.                                                      |
+| **Main Flow**       | 1. Student logs in.<br>2. Opens course page.<br>3. Selects material.<br>4. Downloads or views it. |
+| **Exceptions**      | File missing, access denied, or server error.                                                     |
 
 ---
 
 ### UC-11 – Generate Attendance Reports
 
-| **Primary Actor** | Registrar |
-| **Goal** | Generate attendance summaries for courses. |
-| **Pre-Conditions** | Attendance data available. |
-| **Post-Conditions** | Report generated (PDF/CSV). |
-| **Main Flow** | 1. Registrar selects course/date.<br>2. System compiles data.<br>3. Exports report. |
+| **Item**            | **Details**                                                                                                            |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Registrar                                                                                                              |
+| **Goal**            | Generate attendance summaries for courses and departments.                                                             |
+| **Pre-Conditions**  | Attendance data is available.                                                                                          |
+| **Post-Conditions** | Report generated in PDF or CSV format.                                                                                 |
+| **Main Flow**       | 1. Registrar selects course/date.<br>2. System compiles attendance data.<br>3. Generates report.<br>4. Enables export. |
+| **Exceptions**      | No data found for selected period.                                                                                     |
 
 ---
 
 ### UC-12 – Manage Courses
 
-| **Primary Actor** | Registrar |
-| **Goal** | Create, edit, or remove courses. |
-| **Main Flow** | 1. Open course manager.<br>2. Add/edit course info.<br>3. Save changes. |
+| **Item**            | **Details**                                                                                                   |
+| ------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Registrar                                                                                                     |
+| **Goal**            | Create, edit, or remove courses.                                                                              |
+| **Pre-Conditions**  | Registrar authenticated.                                                                                      |
+| **Post-Conditions** | Course added, updated, or deleted successfully.                                                               |
+| **Main Flow**       | 1. Registrar opens Course Management.<br>2. Adds or updates course details.<br>3. System validates and saves. |
+| **Exceptions**      | Missing or duplicate course data.                                                                             |
 
 ---
 
 ### UC-13 – Assign Students and Teachers to Courses
 
-| **Primary Actor** | Registrar |
-| **Goal** | Assign users to existing courses. |
-| **Pre-Conditions** | Courses and users exist. |
-| **Post-Conditions** | Enrollments saved. |
+| **Item**            | **Details**                                                                                                       |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Registrar                                                                                                         |
+| **Goal**            | Assign students and teachers to existing courses.                                                                 |
+| **Pre-Conditions**  | Courses and user accounts exist in the system.                                                                    |
+| **Post-Conditions** | Assignments saved successfully.                                                                                   |
+| **Main Flow**       | 1. Registrar selects a course.<br>2. Chooses teacher and students.<br>3. System validates and stores assignments. |
+| **Exceptions**      | User already assigned or not found.                                                                               |
 
 ---
 
 ### UC-14 – Manage Schedule and Timetables
 
-| **Primary Actor** | Registrar |
-| **Goal** | Define schedules for classes. |
-| **Main Flow** | 1. Choose course.<br>2. Set class time.<br>3. Save. |
+| **Item**            | **Details**                                                                               |
+| ------------------- | ----------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Registrar                                                                                 |
+| **Goal**            | Define and update class schedules and timetables.                                         |
+| **Pre-Conditions**  | Courses exist and have assigned instructors.                                              |
+| **Post-Conditions** | Schedule stored and visible to students and teachers.                                     |
+| **Main Flow**       | 1. Registrar selects course.<br>2. Defines class time and location.<br>3. Saves schedule. |
+| **Exceptions**      | Conflicting schedule detected.                                                            |
 
 ---
 
 ### UC-15 – Manage Users and Roles
 
-| **Primary Actor** | Admin |
-| **Goal** | Manage all users and assign roles. |
-| **Main Flow** | 1. Add/edit users.<br>2. Set permissions.<br>3. Save changes. |
+| **Item**            | **Details**                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Admin                                                                                             |
+| **Goal**            | Add, edit, and remove users; assign system roles.                                                 |
+| **Pre-Conditions**  | Admin logged in with permissions.                                                                 |
+| **Post-Conditions** | User accounts and roles updated.                                                                  |
+| **Main Flow**       | 1. Admin opens user management.<br>2. Edits or adds users.<br>3. Sets roles.<br>4. Saves changes. |
+| **Exceptions**      | Duplicate username or insufficient privileges.                                                    |
 
 ---
 
 ### UC-16 – Monitor System Logs and Maintenance
 
-| **Primary Actor** | Admin |
-| **Goal** | Monitor activity logs and perform backups. |
-| **Main Flow** | 1. Open logs panel.<br>2. Review user actions.<br>3. Trigger backup or maintenance task. |
+| **Item**            | **Details**                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Admin                                                                                          |
+| **Goal**            | Monitor user activities and perform maintenance or backups.                                    |
+| **Pre-Conditions**  | Admin has access to system logs.                                                               |
+| **Post-Conditions** | Logs reviewed and backups completed.                                                           |
+| **Main Flow**       | 1. Admin opens logs panel.<br>2. Reviews user activity.<br>3. Initiates backup or maintenance. |
+| **Exceptions**      | Backup failure or access denied.                                                               |
 
 ---
 
