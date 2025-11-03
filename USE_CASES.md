@@ -1,38 +1,96 @@
+# USE_CASES.md
+
 ## 🎯 Objective
 
-To identify the main actors and develop formal use cases that describe how users and external systems interact with the **Smart University Ecosystem** — an integrated LMS platform with AI-based face recognition attendance and AI quiz generation.
-
-![use case](/assets//usecase.jpg)
-
----
-
-## 1. Key Actors
-
-| **Actor**                               | **Type**        | **Description**                                                                         |
-| --------------------------------------- | --------------- | --------------------------------------------------------------------------------------- |
-| **Teacher**                             | Human           | Controls attendance sessions, uploads lectures, and generates quizzes.                  |
-| **Student**                             | Human           | Views attendance, submits assignments/quizzes, and checks grades.                       |
-| **Registrar**                           | Human           | Manages courses, assigns users, and generates attendance reports.                       |
-| **Admin**                               | Human           | Manages system users, roles, and monitors platform activity.                            |
-| **Face Recognition Device (AI Camera)** | External System | Detects and sends facial data to the system when a teacher opens an attendance session. |
-| **Quiz Generator API (OpenAI)**         | External System | Generates quiz questions based on lecture materials when requested by the teacher.      |
+This document models the **Smart University Ecosystem** — a learning management system with integrated **AI-based face recognition attendance** and **AI-powered quiz generation**.  
+The goal of this use case modeling is to identify all **actor–system interactions** and provide a **complete and detailed overview** of system functionality as derived from the elicitation requirements.
 
 ---
 
-## 2. Use Case List
+## 1. Abstract Use Case Diagram (System Overview)
 
-| **Use Case ID** | **Use Case Name**                       | **Primary Actor(s)** | **Supporting Actor(s)**      |
-| --------------- | --------------------------------------- | -------------------- | ---------------------------- |
-| UC-01           | Record Attendance with Face Recognition | Teacher              | Face Recognition Device (AI) |
-| UC-02           | Manual Attendance                       | Teacher              | —                            |
-| UC-03           | Upload Lecture                          | Teacher              | —                            |
-| UC-04           | Generate Quiz                           | Teacher              | Quiz Generator API (OpenAI)  |
-| UC-05           | View Attendance Dashboard               | Student              | —                            |
-| UC-06           | Submit Assignment/Quiz                  | Student              | —                            |
-| UC-07           | Generate Attendance Reports             | Registrar            | —                            |
-| UC-08           | Manage Users and Roles                  | Admin                | —                            |
-| UC-09           | Course Making                           | Registrar            | —                            |
-| UC-10           | Assign Students and Teachers to Courses | Registrar            | —                            |
+The following diagram represents the **entire system** and its primary actors.  
+It shows all user roles and external systems interacting with the Smart University Ecosystem.
+
+![System-Level Use Case Diagram](/assets/usecase-overview.jpg)
+
+**Actors:**
+
+- Teacher
+- Student
+- Registrar
+- Admin
+- Face Recognition Device (AI)
+- Quiz Generator API (OpenAI)
+
+---
+
+## 2. Subsystem Use Case Diagrams
+
+Each actor has specific interactions within the system.  
+Below are detailed sub-diagrams focusing on each actor’s related use cases.
+
+---
+
+### 📘 2.1 Teacher Subsystem Use Case Diagram
+
+**Actors:** Teacher, Face Recognition Device (AI Camera), Quiz Generator API (OpenAI)
+
+**Use Cases:**
+
+- Record Attendance with Face Recognition
+- Manual Attendance (<<extend>>)
+- Upload Lecture
+- Generate Quiz (with AI API)
+- Grade Student Submissions
+
+![Teacher Subsystem Diagram](/assets/TeacherUseCase.jpg)
+
+---
+
+### 📗 2.2 Student Subsystem Use Case Diagram
+
+**Actors:** Student
+
+**Use Cases:**
+
+- View Attendance Dashboard
+- Submit Assignment/Quiz
+- View Grades and Progress
+- Receive Notifications
+- Access Uploaded Lectures
+
+![Student Subsystem Diagram](/assets/StudentUseCase.jpg)
+
+---
+
+### 📙 2.3 Registrar Subsystem Use Case Diagram
+
+**Actors:** Registrar
+
+**Use Cases:**
+
+- Generate Attendance Reports
+- Create and Manage Courses
+- Assign Students and Teachers to Courses
+- Manage Schedule and Timetables
+
+![Registrar Subsystem Diagram](/assets/RegistrarUseCase.jpg)
+
+---
+
+### 📒 2.4 Admin Subsystem Use Case Diagram
+
+**Actors:** Admin
+
+**Use Cases:**
+
+- Manage Users and Roles
+- Monitor System Logs and Security
+- Manage Announcements
+- Backup and System Maintenance
+
+![Admin Subsystem Diagram](/assets/AdminUseCase.jpg)
 
 ---
 
@@ -42,164 +100,183 @@ To identify the main actors and develop formal use cases that describe how users
 
 ### UC-01 – Record Attendance with Face Recognition
 
-| **Item**                | **Details**                                                                                                                                                                                                      |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Primary Actor(s)**    | Teacher                                                                                                                                                                                                          |
-| **Supporting Actor(s)** | Face Recognition Device (AI)                                                                                                                                                                                     |
-| **Goal**                | Automatically record student attendance through AI facial recognition.                                                                                                                                           |
-| **Pre-Conditions**      | Teacher is logged in and has created a class session; camera device is connected.                                                                                                                                |
-| **Post-Conditions**     | Attendance records saved with timestamps and confidence scores.                                                                                                                                                  |
-| **Main Flow**           | 1. Teacher opens an attendance session.<br>2. System activates the face recognition device.<br>3. Students’ faces are scanned.<br>4. The system validates matches (≥85%).<br>5. Attendance stored automatically. |
-| **Alternate Flow**      | AI fails to detect some faces → teacher manually marks them.                                                                                                                                                     |
-| **Exceptions**          | Camera disconnected or network error.                                                                                                                                                                            |
-| **Relationship**        | <<extend>> UC-02 Manual Attendance                                                                                                                                                                               |
+| **Item**             | **Details**                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Primary Actor**    | Teacher                                                                                                                              |
+| **Supporting Actor** | Face Recognition Device (AI)                                                                                                         |
+| **Goal**             | Automatically record attendance using facial recognition cameras.                                                                    |
+| **Pre-Conditions**   | Teacher logged in and session created.                                                                                               |
+| **Post-Conditions**  | Attendance records saved with timestamps.                                                                                            |
+| **Main Flow**        | 1. Teacher starts session.<br>2. System activates camera.<br>3. Device scans students.<br>4. Matches ≥85%.<br>5. Records attendance. |
+| **Alternate Flow**   | Face not detected → teacher marks manually.                                                                                          |
+| **Exceptions**       | Camera or network failure.                                                                                                           |
+| **Relationship**     | <<extend>> UC-02 Manual Attendance                                                                                                   |
 
 ---
 
 ### UC-02 – Manual Attendance
 
-| **Item**             | **Details**                                                                                                            |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **Primary Actor(s)** | Teacher                                                                                                                |
-| **Goal**             | Allow the teacher to manually mark attendance if AI recognition fails.                                                 |
-| **Pre-Conditions**   | An active attendance session exists.                                                                                   |
-| **Post-Conditions**  | Attendance records updated manually.                                                                                   |
-| **Main Flow**        | 1. Teacher opens manual attendance form.<br>2. Selects absent/present students.<br>3. System updates attendance table. |
-| **Exceptions**       | Unauthorized access or invalid session.                                                                                |
+| **Item**            | **Details**                                                        |
+| ------------------- | ------------------------------------------------------------------ |
+| **Primary Actor**   | Teacher                                                            |
+| **Goal**            | Allow manual attendance if recognition fails.                      |
+| **Pre-Conditions**  | Active attendance session exists.                                  |
+| **Post-Conditions** | Manual attendance saved.                                           |
+| **Main Flow**       | 1. Open manual attendance.<br>2. Mark students.<br>3. Save record. |
+| **Exceptions**      | Unauthorized access.                                               |
 
 ---
 
 ### UC-03 – Upload Lecture
 
-| **Item**             | **Details**                                                                                                        |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| **Primary Actor(s)** | Teacher                                                                                                            |
-| **Goal**             | Allow teachers to upload lecture files (PDF, DOCX, PPTX, MP4).                                                     |
-| **Pre-Conditions**   | Teacher is authenticated and assigned to a course.                                                                 |
-| **Post-Conditions**  | Lecture materials stored in the system.                                                                            |
-| **Main Flow**        | 1. Teacher uploads lecture file.<br>2. System validates and stores the file.<br>3. Confirmation message displayed. |
-| **Exceptions**       | Invalid file format or upload failure.                                                                             |
+| **Item**            | **Details**                                                                                   |
+| ------------------- | --------------------------------------------------------------------------------------------- |
+| **Primary Actor**   | Teacher                                                                                       |
+| **Goal**            | Upload course materials (PDF, PPTX, etc.).                                                    |
+| **Pre-Conditions**  | Teacher authenticated and assigned to a course.                                               |
+| **Post-Conditions** | Files stored and available for students.                                                      |
+| **Main Flow**       | 1. Teacher uploads.<br>2. System validates.<br>3. Stores in DB.<br>4. Confirmation displayed. |
+| **Exceptions**      | File too large or invalid.                                                                    |
 
 ---
 
 ### UC-04 – Generate Quiz
 
-| **Item**                | **Details**                                                                                                                                                                               |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Primary Actor(s)**    | Teacher                                                                                                                                                                                   |
-| **Supporting Actor(s)** | Quiz Generator API (OpenAI)                                                                                                                                                               |
-| **Goal**                | Generate quizzes automatically using OpenAI API based on uploaded lecture material.                                                                                                       |
-| **Pre-Conditions**      | At least one lecture has been uploaded.                                                                                                                                                   |
-| **Post-Conditions**     | Quiz generated and linked to the course.                                                                                                                                                  |
-| **Main Flow**           | 1. Teacher selects a lecture.<br>2. Chooses “Generate Quiz.”<br>3. System sends request to OpenAI API.<br>4. API returns questions and answers.<br>5. System saves and displays the quiz. |
-| **Exceptions**          | API rate limit exceeded or no internet connection.                                                                                                                                        |
+| **Item**             | **Details**                                                                                                                                    |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Primary Actor**    | Teacher                                                                                                                                        |
+| **Supporting Actor** | Quiz Generator API (OpenAI)                                                                                                                    |
+| **Goal**             | Automatically generate quiz based on lecture content.                                                                                          |
+| **Pre-Conditions**   | Lecture uploaded.                                                                                                                              |
+| **Post-Conditions**  | Quiz saved in database.                                                                                                                        |
+| **Main Flow**        | 1. Teacher selects lecture.<br>2. Chooses “Generate Quiz.”<br>3. System sends lecture text to API.<br>4. Receives questions.<br>5. Saves quiz. |
+| **Exceptions**       | API failure or no internet.                                                                                                                    |
 
 ---
 
-### UC-05 – View Attendance Dashboard
+### UC-05 – Grade Student Submissions
 
-| **Item**             | **Details**                                                                                   |
-| -------------------- | --------------------------------------------------------------------------------------------- |
-| **Primary Actor(s)** | Student                                                                                       |
-| **Goal**             | Display attendance records and course progress to the student.                                |
-| **Pre-Conditions**   | Student logged in and enrolled in courses.                                                    |
-| **Post-Conditions**  | Attendance percentage and alerts displayed.                                                   |
-| **Main Flow**        | 1. Student opens dashboard.<br>2. System retrieves records.<br>3. Attendance chart displayed. |
-| **Exceptions**       | Missing or corrupted attendance data.                                                         |
-
----
-
-### UC-06 – Submit Assignment/Quiz
-
-| **Item**             | **Details**                                                                                                                   |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| **Primary Actor(s)** | Student                                                                                                                       |
-| **Goal**             | Allow students to submit assignments or answer quizzes.                                                                       |
-| **Pre-Conditions**   | Assignment/quiz available in the student’s course.                                                                            |
-| **Post-Conditions**  | Submission recorded and stored.                                                                                               |
-| **Main Flow**        | 1. Student opens quiz/assignment.<br>2. Uploads answers or submits responses.<br>3. System records submission with timestamp. |
-| **Exceptions**       | Late submission or network failure.                                                                                           |
+| **Item**            | **Details**                                                                      |
+| ------------------- | -------------------------------------------------------------------------------- |
+| **Primary Actor**   | Teacher                                                                          |
+| **Goal**            | Review and grade student work.                                                   |
+| **Pre-Conditions**  | Submissions exist.                                                               |
+| **Post-Conditions** | Grades recorded and visible to students.                                         |
+| **Main Flow**       | 1. Open submission.<br>2. Review answers.<br>3. Assign grade.<br>4. Save result. |
+| **Exceptions**      | Database write failure.                                                          |
 
 ---
 
-### UC-07 – Generate Attendance Reports
+### UC-06 – View Attendance Dashboard
 
-| **Item**             | **Details**                                                                                                                                  |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Primary Actor(s)** | Registrar                                                                                                                                    |
-| **Goal**             | Generate attendance and participation reports for departments or courses.                                                                    |
-| **Pre-Conditions**   | Attendance data exists in the system.                                                                                                        |
-| **Post-Conditions**  | Report generated and downloadable (PDF/CSV).                                                                                                 |
-| **Main Flow**        | 1. Registrar selects course/date range.<br>2. System fetches data.<br>3. Calculates attendance percentage.<br>4. Displays report for export. |
-| **Exceptions**       | No data found for selected range.                                                                                                            |
+| **Primary Actor** | Student |
+| **Goal** | View attendance rates and history. |
+| **Pre-Conditions** | Student enrolled in courses. |
+| **Post-Conditions** | Dashboard displays accurate attendance %. |
+| **Main Flow** | 1. Student logs in.<br>2. Opens dashboard.<br>3. Data displayed per course. |
+| **Exceptions** | Missing data or backend error. |
 
 ---
 
-### UC-08 – Manage Users and Roles
+### UC-07 – Submit Assignment/Quiz
 
-| **Item**             | **Details**                                                                                                       |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| **Primary Actor(s)** | Admin                                                                                                             |
-| **Goal**             | Manage user accounts and assign roles (Teacher, Student, Registrar, Admin).                                       |
-| **Pre-Conditions**   | Admin logged in with valid credentials.                                                                           |
-| **Post-Conditions**  | User accounts updated successfully.                                                                               |
-| **Main Flow**        | 1. Admin opens user management panel.<br>2. Adds/edits users.<br>3. Assigns roles.<br>4. System confirms changes. |
-| **Exceptions**       | Duplicate username or invalid input.                                                                              |
+| **Primary Actor** | Student |
+| **Goal** | Submit answers to assignments or quizzes. |
+| **Pre-Conditions** | Quiz published and open. |
+| **Post-Conditions** | Submission saved with timestamp. |
+| **Main Flow** | 1. Student opens quiz.<br>2. Answers and submits.<br>3. Confirmation shown. |
+| **Exceptions** | Late or incomplete submission. |
 
 ---
 
-### UC-09 – Course Making
+### UC-08 – View Grades and Progress
 
-| **Item**             | **Details**                                                                                             |
-| -------------------- | ------------------------------------------------------------------------------------------------------- |
-| **Primary Actor(s)** | Registrar                                                                                               |
-| **Goal**             | Create new courses in the system.                                                                       |
-| **Pre-Conditions**   | Registrar authenticated.                                                                                |
-| **Post-Conditions**  | Course added to catalog.                                                                                |
-| **Main Flow**        | 1. Registrar clicks “Add Course.”<br>2. Fills in course details.<br>3. System saves course to database. |
-| **Exceptions**       | Missing or duplicate course name.                                                                       |
+| **Primary Actor** | Student |
+| **Goal** | View scores, grades, and gamified progress. |
+| **Pre-Conditions** | Graded data exists. |
+| **Post-Conditions** | Dashboard updated with results. |
+| **Main Flow** | 1. Student opens progress tab.<br>2. System fetches data.<br>3. Displays grades and trophies. |
+| **Exceptions** | No graded items available. |
 
 ---
 
-### UC-10 – Assign Students and Teachers to Courses
+### UC-09 – Receive Notifications
 
-| **Item**             | **Details**                                                                                                 |
-| -------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **Primary Actor(s)** | Registrar                                                                                                   |
-| **Goal**             | Assign students and teachers to specific courses.                                                           |
-| **Pre-Conditions**   | Courses and users exist in the database.                                                                    |
-| **Post-Conditions**  | Assignments saved successfully.                                                                             |
-| **Main Flow**        | 1. Registrar selects a course.<br>2. Adds teacher and enrolled students.<br>3. System confirms assignments. |
-| **Exceptions**       | User not found or already assigned.                                                                         |
+| **Primary Actor** | Student |
+| **Goal** | Receive alerts (grades, new materials, quizzes). |
+| **Pre-Conditions** | Student enrolled in courses. |
+| **Post-Conditions** | Notifications delivered and stored. |
+| **Main Flow** | 1. Event triggered (e.g., new quiz).<br>2. System sends alert.<br>3. Student reads notification. |
 
 ---
 
-## 4. Use Case Diagram Summary
+### UC-10 – Access Uploaded Lectures
 
-**System Name:** Smart University Ecosystem
-
-### Actors
-
-- Teacher
-- Student
-- Registrar
-- Admin
-- Face Recognition Device (AI Camera)
-- Quiz Generator API (OpenAI)
-
-### Includes and Extends
-
-- **UC-01** _Record Attendance with Face Recognition_ <<extend>> _UC-02 Manual Attendance_
-- **UC-04** _Generate Quiz_ interacts with _Quiz Generator API (OpenAI)_
+| **Primary Actor** | Student |
+| **Goal** | Access stored lecture materials. |
+| **Main Flow** | 1. Opens course.<br>2. Views available files.<br>3. Downloads material. |
+| **Exceptions** | File missing or permission denied. |
 
 ---
 
-## 5. Summary Explanation
+### UC-11 – Generate Attendance Reports
 
-The **Smart University Ecosystem** integrates human actors and external systems to automate university operations.  
-Teachers and devices collaborate in attendance marking, while OpenAI’s API assists with quiz creation.  
-Students interact for learning and submission purposes, and administrators manage structure and security.  
-This design ensures realistic modeling of both **human** and **system-level** interactions using standard UML practices.
+| **Primary Actor** | Registrar |
+| **Goal** | Generate attendance summaries for courses. |
+| **Pre-Conditions** | Attendance data available. |
+| **Post-Conditions** | Report generated (PDF/CSV). |
+| **Main Flow** | 1. Registrar selects course/date.<br>2. System compiles data.<br>3. Exports report. |
+
+---
+
+### UC-12 – Manage Courses
+
+| **Primary Actor** | Registrar |
+| **Goal** | Create, edit, or remove courses. |
+| **Main Flow** | 1. Open course manager.<br>2. Add/edit course info.<br>3. Save changes. |
+
+---
+
+### UC-13 – Assign Students and Teachers to Courses
+
+| **Primary Actor** | Registrar |
+| **Goal** | Assign users to existing courses. |
+| **Pre-Conditions** | Courses and users exist. |
+| **Post-Conditions** | Enrollments saved. |
+
+---
+
+### UC-14 – Manage Schedule and Timetables
+
+| **Primary Actor** | Registrar |
+| **Goal** | Define schedules for classes. |
+| **Main Flow** | 1. Choose course.<br>2. Set class time.<br>3. Save. |
+
+---
+
+### UC-15 – Manage Users and Roles
+
+| **Primary Actor** | Admin |
+| **Goal** | Manage all users and assign roles. |
+| **Main Flow** | 1. Add/edit users.<br>2. Set permissions.<br>3. Save changes. |
+
+---
+
+### UC-16 – Monitor System Logs and Maintenance
+
+| **Primary Actor** | Admin |
+| **Goal** | Monitor activity logs and perform backups. |
+| **Main Flow** | 1. Open logs panel.<br>2. Review user actions.<br>3. Trigger backup or maintenance task. |
+
+---
+
+## 4. Relationships and Interactions
+
+| **Relationship Type**     | **Description**                                                        |
+| ------------------------- | ---------------------------------------------------------------------- |
+| **<<extend>>**            | “Record Attendance with Face Recognition” extends “Manual Attendance.” |
+| **<<include>>**           | “Generate Quiz” includes “Send Request to OpenAI API.”                 |
+| **External System Links** | Face Recognition Device provides input; OpenAI API returns quiz data.  |
 
 ---
 
