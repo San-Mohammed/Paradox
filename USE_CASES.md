@@ -12,7 +12,7 @@ The goal of this use case modeling is to identify all **actor–system interacti
 The following diagram represents the **entire system** and its primary actors.  
 It shows all user roles and external systems interacting with the Smart University Ecosystem.
 
-![System-Level Use Case Diagram](/assets/usecase-overview.jpg)
+![System-Level Use Case Diagram](/assets/usecase.jpg)
 
 **Actors:**
 
