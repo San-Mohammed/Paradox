@@ -73,3 +73,26 @@ The following methods are proposed to validate the requirements:
 ### Resolution of Gaps
 
 *   **FR-010 (Smart student planner) and FR-013 (Search functionality):** New use cases will be created to model these features and ensure they are properly integrated into the system design. This will be addressed during the peer review session.
+
+## 4. Verification and Validation (V&V) Strategy
+
+The V&V process is crucial to ensure that the system is built correctly and that it meets the actual needs of the stakeholders.
+
+### Verification: "Did we build the system right?"
+
+Verification is a developer-focused process to ensure the system is built according to its specifications. This involves:
+
+*   **Correctness:** Developers will conduct unit tests and integration tests to ensure that each component of the system behaves as specified in the requirements. For example, the face recognition module will be tested to ensure it correctly identifies students from the test images.
+*   **Completeness:** Code reviews and the traceability matrix will be used to ensure that all specified requirements have been implemented. Any gaps, such as the ones identified for `FR-010` and `FR-013`, will be addressed.
+*   **Pertinence:** The development team will ensure that no unrequested features are added to the system, keeping the implementation focused on the defined scope.
+
+### Validation: "Did we build the right system?"
+
+Validation is a stakeholder-focused process to ensure that the system meets the users' actual needs. This involves:
+
+*   **Stakeholder Requirement Validation:** The primary goal is to confirm that the developed system fulfills the requirements gathered during the elicitation phase.
+*   **Stakeholder Checks:** Stakeholders (teachers, students, registrars) will be involved in the validation process. They will check the correctness and usability of the system from their perspective.
+*   **Prototype Usage:** As mentioned in the Validation Plan, low-fidelity UI prototypes will be used to get early feedback from stakeholders. This will help to ensure that the system's design and workflow meet their expectations before development begins.
+*   **Pilot Program:** The pilot program will be the ultimate validation step, where stakeholders will use the live system in a controlled environment and provide feedback on its real-world performance and usability.
+
+By implementing this V&V strategy, we can be confident that the Smart University Ecosystem will be a high-quality system that is both well-built and genuinely useful to its users.
